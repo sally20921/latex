@@ -1,0 +1,119 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Self-supervised learning: Generative or Contrastive
+}
+
+\author{\IEEEauthorblockN{Seri Lee}
+\IEEEauthorblockA{\textit{Computer Science and Engineering} \\
+\textit{Seoul National University}\\
+Seoul, Republic of Korea\\
+sally20921@snu.ac.kr}
+
+}
+
+\maketitle
+
+\begin{abstract}
+Deep supervised learning has achieved great success in the last decade.
+However, its deficiencies of dependence on manual labels and vulnerability
+to attacks have driven people to explore a better solution.
+As an alternative, self-supervised learning (SSL) attracts many researchers
+for its soaring performance on representation learning in the last several years.
+Self-supervised representation learning leverages input data itself as
+supervision and benefits almost all types of downstream tasks.
+In this survey, we take a look into new self-supervised learning methods for 
+representation in computer vision, natural language processing, and 
+graph learning. We comprehensively review the existing empirical methods and 
+summarize them into three main categories according to their objectives:
+generative, contrastive, and generative-contrastive (adversarial).
+We further investigate related theoretical analysis work to provide deeper 
+thoughts on how self-supervision works.
+Finally, we briefly discuss open problems and future directions for self-supervised 
+learning.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Self-supervised Learning, Generative Model, Contrastive Learning, Deep Learning
+\end{IEEEkeywords}
+
+\section{Introduction}
+Deep neural networks \cite{b1} have shown outstanding performance 
+on various machine learning tasks, especially on supervised learning 
+in computer vision (image classification, semantic segmentation),
+natural language processing (pre-trained language models, sentiment
+analysis, question answering) and graph learning (node classification,
+graph classification).
+Generally, the supervised learning is trained over a specific
+task with a large manually labeled dataset which is randomly divided
+into training, validation, and test sets.
+
+However, supervised learning is meeting its bottleneck. 
+It not only relies heavily on expensive manual labeling but 
+also suffers from generalization error, spurious correlations, 
+and adversarial attacks. 
+We expect the neural network to learn more with fewer labels, 
+fewer samples, or fewer trials.
+As a promising  candidate, self-supervised learning has drawn 
+massive attention for its fantastic data efficiency and 
+generalization ability, with many state-of-the-art models 
+following this paradigm. 
+In this survey, we will take a comprehensive look at the development
+of the recent self-supervised learning models and discuss 
+their theoretical soundness, including frameworks such as Pre-trained
+Language Models (PTM), Generative Adversarial Networks (GAN),
+Autoencoder and its extensions, Deep Infomax, and Contrastive Coding.
+
+The term ``self-supervised learning'' was first introduced in robotics,
+where the training data is automatically labeled by finding and 
+exploring the relations between different input sensor signals.
+It was then borrowed by the field of machine learning.
+In a speech on AAAI 2020, Yann LeCun described self-supervised 
+learning as ``the machine predicts any parts of its input for 
+any observed part''.
+We can summarize them into two classical definitions following 
+LeCun's:
+\begin{itemize}
+    \item Obtain ``labels'' from the data itself by using a ``semi-automatic'' process.
+    \item Predict part of the data from other parts.
+\end{itemize}
+Specifically, the ``other part'' here could be incomplete, 
+transformed, distorted, or corrupted. In other words, the machine 
+learns to `recover' whole, or parts of, or merely some features 
+of its original input.
+
+People are often confused by unsupervised learning and self-supervised learning.
+Self-supervised learning can be viewed as a branch of unsupervised learning
+since there is no manual label involved.
+However, narrowly speaking, unsupervised learning concentrates on 
+detecting specific data patterns, such as clustering, community discovery,
+or anomaly detection, while self-supervised learning aims at recovering,
+which is still in the paradigm of supervised settings.
+
+There exist several comprehensive reviews related to Pre-trained Language Models,
+Generative Adversarial Networks, Autoencoder and contrastive learning for 
+visual representation. 
+However, none of them concentrates on the inspiring idea of self-supervised learning 
+that illustrates researchers in many fields. 
+In this work, we collect studies from natural language processing, 
+computer vision, and graph learning in recent years to present an 
+up-to-date and comprehensive retrospective on the frontier of self-supervised learning.
+
+\section{Background}
+\subsection{Representation Learning in NLP}
+
+\bibliography{refs_ssl}
+\bibliographystyle{plain}
+
+
+\end{document}
