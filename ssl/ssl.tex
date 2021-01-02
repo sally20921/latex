@@ -18,8 +18,7 @@
 \IEEEauthorblockA{\textit{Computer Science and Engineering} \\
 \textit{Seoul National University}\\
 Seoul, Republic of Korea\\
-sally20921@snu.ac.kr}
-
+sally20921@snu.ac.kr} 
 }
 
 \maketitle
@@ -111,9 +110,67 @@ up-to-date and comprehensive retrospective on the frontier of self-supervised le
 
 \section{Background}
 \subsection{Representation Learning in NLP}
+Pretrained word representations are key components in natural language
+processing tasks. 
+Word embeddings are to represent words as low-dimensional real-valued 
+vectors.
+There are two kinds of word embeddings: non-contextual and contextual embeddings.
+
+Non-contextual embeddings do not consider the context information of the token;
+that is, these models only map the token into a distributed embedding space.
+Thus, for each word $x$ in the vocabulary $V$, embedding will assign it a 
+specific vector $e_x \in R_d$, where $d$ is the dimension of the embedding.
+These embeddings can not model complex characteristics of word usage and polysemy.
+
+To model both complex characteristics of word usage and polysemy,
+contextual embedding is proposed.
+For a text sequence $x_1, x_2, \ldots, x_N, x_n \in V$, 
+the contextual embedding of $x_n$ depends on the whole sequence.
+\begin{equation}
+    [e_1, e_2, \ldots, e_N] = f(x_1, x_2, \ldots, x_N) 
+\end{equation}
+where $f(\cdot)$ is the embedding function.
+Since for a certain token $x_i$, the embedding $e_i$
+can be different if $x_i$ in difference context, 
+$e_i$ is called contextual embedding. 
+This kind of embedding can distinguish the semantics of words
+in different contexts.
+
+Distributed word embeddings represent each word as a 
+dense, real-valued, and low-dimensional vector.
+The first-generation word embedding is introduced as a neural network language model (NNLM).
+For NNLM, most of the complexity derives from the non-linear hidden layer in the model.
+Mikolov et al. proposed Word2Vec Model to learn the word representations efficiently.
+There are two kinds of implementations: Continuous Bag-of-Words Model (CBOW)
+and Continuous Skip-gram Model (SG). 
+As a kind of context prediction model, Word2Vec is one of the most 
+popular implementations to generate non--contextual word embeddings for NLP.
+
+In the first-generation word embedding, the same word has the same embedding.
+Since a word can have multiple senses, therefore, the second-generation word 
+embedding methods are proposed.
+In this case, each word token has its embedding.
+These embeddings are also called contextualized word embedding since the embeddings 
+of word tokens depend on its contexts.
+ELMo(Embeddings from Language Model) is an implementation to generate those 
+contextual word embeddings. 
+It is an RNN-based bidirectional language model which learns multiple embeddings for 
+based on downstream tasks. 
+ElMo is a feature-based approach, that is, the model is used as a feature extractor
+to extract word embedding, and send those embeddings to the downstream task model.
+The parameters of the extractor are fixed, and only the parameters in the backend model can be trained.
+
+Recently, BERT (Bidirectional Encoder Representations from Transformers) brings large improvements on 
+11 NLP tasks.
+Different from feature-based approaches like ELMo, BERT is a fine-tuned approach.
+The model is first pretrained on a large amount of corpora through self-supervised learning,
+and then fine-tuned with labeled data. 
+As the name indicates, BERT uses Transformer as its encoder.
+In the training stage, BERT masks some tokens in the sentence, and is then trained  to predict the masked words.
+When using BERT, we first initialize the BERT model with pretrained weights, and then fine-tune 
+the pretrained model on downstream tasks.
 
 \bibliography{refs_ssl}
 \bibliographystyle{plain}
-
 
 \end{document}

@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.12.26)  31 DEC 2020 07:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.12.26)  31 DEC 2020 04:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/seri/latex/ssl/ssl.tex
-(/Users/seri/latex/ssl/ssl.tex
+**/Users/seri/latex/da/mixup.tex
+(/Users/seri/latex/da/mixup.tex
 LaTeX2e <2020-10-01> patch level 2
 L3 programming layer <2020-12-07> xparse <2020-03-03> (/usr/local/texlive/2020basic/texmf-dist/tex/latex/IEEEtran/IEEEtran.cls
 Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
@@ -221,8 +221,8 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count274
 \l__pdf_internal_box=\box51
-) (/Users/seri/latex/ssl/ssl.aux)
-\openout1 = `ssl.aux'.
+) (/Users/seri/latex/da/mixup.aux)
+\openout1 = `mixup.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
@@ -258,23 +258,7 @@ Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/local/texlive/2020basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
-))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 86.
- (/usr/local/texlive/2020basic/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 86.
- (/usr/local/texlive/2020basic/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \hbox (badness 2005) in paragraph at lines 94--101
-\OT1/ptm/m/n/10 self-supervised learn-ing. Self-supervised learn-ing can be
- []
-
-[1{/usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
-
-
-] (/Users/seri/latex/ssl/ssl.bbl)
+)) (/Users/seri/latex/da/mixup.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -286,22 +270,24 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[2
+[1{/usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-] (/Users/seri/latex/ssl/ssl.aux) ) 
+
+
+] (/Users/seri/latex/da/mixup.aux) ) 
 Here is how much of TeX's memory you used:
- 3866 strings out of 479382
- 56895 string characters out of 5866894
- 349273 words of memory out of 5000000
- 20955 multiletter control sequences out of 15000+600000
- 435632 words of font info for 84 fonts, out of 8000000 for 9000
+ 3838 strings out of 479382
+ 56411 string characters out of 5866894
+ 339277 words of memory out of 5000000
+ 20940 multiletter control sequences out of 15000+600000
+ 433933 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,8n,72p,248b,255s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2020basic/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /Users/seri/latex/ssl/ssl.pdf (2 pages, 106435 bytes).
+ 66i,8n,72p,249b,255s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2020basic/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /Users/seri/latex/da/mixup.pdf (1 page, 52292 bytes).
 PDF statistics:
- 52 PDF objects out of 1000 (max. 8388607)
- 37 compressed objects within 1 object stream
+ 25 PDF objects out of 1000 (max. 8388607)
+ 17 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

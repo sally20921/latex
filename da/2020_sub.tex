@@ -1,0 +1,86 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Single-Source Deep Unsupervised Visual Domain Adaptation}
+
+\author{\IEEEauthorblockN{Seri Lee}
+\IEEEauthorblockA{\textit{Computer Science and Engineering} \\
+\textit{Seoul National University}\\
+Seoul, Republic of Korea\\
+sally20921@snu.ac.kr}
+ß
+}
+
+\maketitle
+
+\begin{abstract}
+\end{abstract}
+
+\begin{IEEEkeywords}
+Domain adaptation, discrepancy-based methods, adversarial learning,
+self-supervised learning, transfer learning 
+\end{IEEEkeywords}
+
+\section{Introduction}
+\subsection{Domain Adaptation in context of other sample-efficient 
+learning methods}
+Domain adaptation techniques were introduced to address the domain shift
+between source and target domains \cite{b1} and for this reason,
+they have recently attracted significant interest in both academia
+and industry. 
+\textit{Domain adaptation} (DA), also known as \textit{domain transfer},
+is a specialized form of transfer learning that aims to learn a
+model from a labeled source domain that can generalize well to a 
+different (but related) unlabeled or sparsely labeled target domain.
+It belongs to the sample-efficient learning class, together with zero-shot
+learning, few-shot learning, and self-supervised learning.
+We briefly compare domain adaptation with other methods in this category.
+While the unsupervised domain adaptation (UDA) does not require the annoatations 
+of target  data, it usually needs a sufficient number of unlabeled target  samples 
+to train the model.
+Compared to UDA, zero-shot learning does not need either the target data 
+annotations or the unlabeled target samples. 
+However, existing methods often require some auxiliary information, 
+such as the attributes of the images, or the description of the classes.
+Further, zero-shot learning is trained on known classes and tested on unknown classes,
+which demands the model to generalize from known classes to unknown classes.
+Since the known classes and the unknown classes are from different distributions,
+there is no concept of domain shift in zero-shot learning.
+Different from zero-shot learning, DA deals with the same learning tasks on different
+domains. 
+Taking image classification as an example, both source data and target data 
+have the same classes. 
+Few-shot learning shares similar setting with zero-shot learning.
+The difference is that few-shot learning has a few annotated samples for the unknown classes.
+Few shot learning and zero-shot learning can also be grouped as low-shot learning.
+
+Self-supervised learning (SSL) is a learning paradigm that captures
+the intrinsic patterns and properties of input data without using human-provided labels.
+The basic idea of SSL is to construct some auxiliary tasks solely based on the data itself
+without using human-annotated labels and force the network to learn meaningful representations
+by performing the auxiliary tasks well.
+Typical self-supervised learning approaches generally involve two aspects:
+constructing auxiliary tasks and defining loss functions.
+The auxiliary tasks are designed to encourage the model to learn meaningful 
+representations of input data.
+The loss functions are defined to measure the difference between a model's prediction
+and a fixed target, the similarities of sample pairs in a representation space (\textit{e.g.} contrastive loss),
+or the difference between probability distributions (\textit{e.g.} adversarial loss).
+Compared with domain adaptation, SSL does not specifically address the domain shift problem 
+between different domains.
+
+\bibliography{refs_sub}
+\bibliographystyle{plain}
+
+
+\end{document}

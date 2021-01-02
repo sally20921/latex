@@ -1,0 +1,56 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Self-supervised Domain Adaptation for Computer Vision Tasks}
+
+\author{\IEEEauthorblockN{Seri Lee}
+\IEEEauthorblockA{\textit{Computer Science and Engineering} \\
+\textit{Seoul National University}\\
+Seoul, Republic of Korea\\
+sally20921@snu.ac.kr}
+ß
+}
+
+\maketitle
+
+\begin{abstract}
+Recent progress of self-supervised visual representation learning
+has achieved remarkable success on many challenging computer vision
+benchmarks. 
+However, whether these techniques can be used for domain Adaptation
+has not been explored. 
+In this work, we propose a generic method for self-supervised domain adaptation,
+using object recognition and semantic segmentation of urban scenes as use cases.
+Focusing on simple pretext/auxiliary tasks (e.g. image rotation prediction),
+we assess different learning strategies to improve domain adaptation effectiveness 
+by self-supervision. 
+Additionally, we propose two complementary strategies to further boost 
+the domain adaptation accuracy on semantic segmentation within our method,
+consisting of prediction layer alignment and batch normalization calibration.
+The experimental results show adaptation levels comparable to most studied domain
+adaptation methods, thus, bringing self-supervision as a new alternative for 
+reaching domain adaptation. 
+\end{abstract}
+
+\begin{IEEEkeywords}
+Domain Adaptation, semantic segmentation, object recognition
+\end{IEEEkeywords}
+
+\section{Introduction}
+\cite{b1}.
+
+\bibliography{refs_da_ssl}
+\bibliographystyle{plain}
+
+
+\end{document}
