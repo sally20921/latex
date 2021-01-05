@@ -104,53 +104,37 @@ Contrastive learning methods rely on the number of negative samples for generati
 An interesting way to categorize these methods would be based on the technique used to collect negative samples against a positive data-point during training. Based on the approach taken, we categorized the methods into four major architectures. Each architecture is explained separately along with examples of successful methods that follow similar principles.
 
 \subsection{End-to-End Learning}
-End-to-End is a complex learning system that uses gradient-based learning and is designed in such a way that all modules are differentiable.
+End-to-End learning is a complex learning system that uses gradient-based learning and is designed in such a way that all modules are differentiable.
 This architecture prefers large batch sizes to accumulate a greater number of negative samples. 
 Except for the original image and its augmented version, the rest of the images in the batch are considered negative.
-The pipeline employs two encoders: a Query encoder ($Q$) and a Key encoder ($K$). The two encoders can be different and are updated end-to-end by backpropagation during training.
-The main idea behind training these encoders separately is to generate distinct representations of the same sample.
-Using a contrastive loss, it converges to make positive samples closer and negative samples far from the original sample.
-Here, the query encoder $Q$ is trained on the original samples and the key encoder $k$ is trained on their augmented versions (positive samples) along with the negative samples in the batch.
-The features $q$ and $k$ generated from these encoders are used to calculate the similarity between the respective inputs using a similarity metric.
-Most of the time, the similarity metric used is cosine similarity which is simply the inner product of two vectors normalized to have length 1.
+The pipeline employs two encoders: a Query encoder (Q) and a Key encoder (K). The two encoders can be different and are updated end-to-end by backpropagation during training.
+The main idea behind training these encoders separately is to generate distinct representations of the same sample. Using a contrastive loss, it converges to make positive samples closer and negative samples far from the original sample.
+Here, the query encoder $Q$ is trained on the original samples and the key encoder $K$ is trained on their augmented versions (positive samples) along with negative samples in the batch.
+The features $q$ and $k$ generated from these encoders are used to calculate the similarity between the respective inputs using a similarity metric. Most of the time, the similarity metric used is cosine similarity which is simply the inner product 
+of two vectors normalized to have length 1.
 
-Recently, a successful end-to-end model was proposed in SimCLR where they used a batch size of 4096 for 100 epochs.
-It has been verified that end-to-end architectures are simple in complexity but perform better with large batch sizes and higher number of epochs. 
+Recently, a successful end-to-end model was proposed in SimCLR where they used a batch size of 4096 for 100 epochs. It has been verified that end-to-end architectures are simple in complexity 
+but perform better with large batch sizes and a higher number of epochs. Another popular work that follows end-to-end architecture was proposed by Oord et al. where they learn feature representations of high-dimensional time series
+data by predicting the future in latent space by using powerful autoregressive models along with a contrastive loss. This approach makes the model tractable by using negative sampling. 
 
 The number of negative samples available in this approach is coupled with the batch size as it accumulates negative samples from the current batch.
-Since the batch size is limited by the GPU memory size, the scalability factor with these methods remains an issue. Furthermore, for larger batch sizes, the methods suffer from a large mini-batch optimization problem and require effective optimization strategies.
-\subsection{Using a Memory Bank}
-With potential issues from having large batch sizes that could inversely impact the optimization during training, a possible solution is tot maintain a separate dictionary known as memory bank.
-The aim of maintaining a memory bank is to accumulate a large number of feature representations of samples that are used as negative samples during training.
-For this purpose, a dictionary is created that stores and updates the embeddings of samples with the most recent ones at regular intervals.
-The memory bank ($M$) contains a feature representation $m_I$ for each sample $I$ in dataset $D$. The representation $m_I$ is an exponential moving average of feature representations that were computed in prior epochs.
-It enables replacing negative samples $m_I$, by their memory bank representations without increasing the training batch size.
+Since the batch size is limited by the GPU memory size, the scalability factor with these methods remains an issue. Furthermore, for large batch sizes, the methods suffer from a large mini-batch optimization problem and require effective optimization strategies. 
 
-The representation of a sample in the memory bank gets updated when it is last seen, so the sampled keys are essentially about the encoders at multiple different steps all over the past epoch.
-PIRL is one of the recent successful methods that learns good visual representations of images trained using a memory bank. It requires the learner to construct representations of images that are covariant to any of the pretext task being used, though they focus mainly on the Jigsaw pretext task.
-Another popular work that uses a memory bank under contrastive setting was proposed by Wu et al. where they implemented a non-parametric variant of softmax classifier that is more scalable for big data applications.
-
-However, maintaining a memory bank during training can be a complicated task. One of the potential drawbacks of this approach is that it can be computationally expensive to update the representations in the memory bank as the representations get outdated quickly in a few passes.
-\subsection{Using a Momentum Encoder}
-To address the issues with a memory bank, the memory bank gets replaced by a separate module called Momentum Encoder. The momentum encoder generates a dictionary as a queue of encoded keys with the current mini-batch enqueued and the oldest mini-batch dequeued.
-The dictionary keys are defined on-the-fly by a set of data samples in the batch during training. The momentum encoder shares the same parameters as the encoder $Q$.
-It is not backpropagated after every pass, instead, it gets updated based on the parameters of the query encoder.
-
-Though the keys in the queue are encoded by different encoders (in different mini-batches), the difference among these encoders can be made small.
-
-The advantage of using this architecture over the first two is that it does not require training two separate models.
-Furthermore, there is no need to maintain a memory bank that is computationally and memory inefficient.
 \subsection{Clustering Feature Representations}
-All these architectures explained above focus on comparing samples using a similarity metric and try to keep similar items closer and dissimilar items far from each other allowing the model to learn better representations.
-On the contrary, this architecture follows an end-to-end approach with two encoders that share parameters, but instead of using instance-based contrastive approach, they utilize a clustering algorithm to group simiilar features together.
+All three architectures explained above focus on comparing samples using a similarity metric and try to keep similar items closer and dissimilar items far from each other allowing the models to learn better representations.
+On the contrary, this architecture follows and end-to-end approach with two encoders that share parameters, but instead of using instance-based contrastive approach, 
+they use a clustering algorithm to group similar features together.
 
-One of the most recent works that employ clustering methods is SwaV. The diagram points out the differences between other instance-based contrastive learning architectures and the clustering-based methods.
-Here, the goal is not only to make a pair of samples close to each other, but also make sure that all other features that are similar to each other form clusters together.
-For example, in an embedded space of images, the features of cats should be closer to features of dogs but should be far from the featurse of houses.
+One of the most recent works that employ clustering methods is SwAV. The diagram points out the differences between other instance-based contrastive learning architectures and the clustering-based methods.
+Here, the goal is not only to make a pair of samples close to each other but also, make sure that all other features that are similar to each other form clusters together.
+For example, in the embedded space of images, the features of cats should be closer to the features of dogs but should be far from the features of houses.
 
-In instance-based learning, every sample is treated as a discrete class in the dataset. This makes it unreliable in conditions where it compares an input sample against other samples from the same class that the original sample belongs to.
-To explain it clearly, imagine we have an image of a cat in the training batch that is the current input to the model. During this pass, all other images in the batch are considered as negative. The issue arises when there are images of other cats in the negative samples.
-This condition forces the model to learn two images of cats as not similar during training despite both being from the same class. This problem is implicitly addressed by a clustering-based approach.
+In instance-based learning, every sample is treated as a discrete class in the dataset. 
+This makes it unreliable in conditions where it compares an input sample against other samples from the same class that the original sample belongs to.
+To explain it clearly, imagine we have an image of a cat in the training batch that is the current input to the model.
+During this pass, all other images in the batch are considered as negative. The issue arises when there are images of other cats in the negative samples. This condition forces the model to learn two images of cats as not similar during training despite both being from the same class.
+This problem is implicitly addressed by a clustering-based approach.
+
 \section{Encoders}
 Encoders play an integral role in any self-supervised learning pipeline as they are responsible for mapping the input samples to the latent space.
 Without effective feature representations, a classification model might have difficulty in learning to distinguish among different classes. Most of the works in contrastive learning utilitze some variant of ResNet model.

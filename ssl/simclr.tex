@@ -1,0 +1,147 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{verbatim}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{A Simple Framework for Contrastive Learning of Visual Representations}
+
+\author{\IEEEauthorblockN{Seri Lee}
+\IEEEauthorblockA{\textit{Computer Science and Engineering} \\
+\textit{Seoul National University}\\
+Seoul, Republic of Korea\\
+sally20921@snu.ac.kr} 
+}
+
+\maketitle
+
+\begin{abstract}
+This paper presents SimCLR: a simple framework for contrastive learning of visual representations.
+We simplify recently proposed contrastive self-supervised learning algorithms without requiring specialized architectures or a memory bank.
+In order to understand what enables the contrastive prediction tasks to learn useful representations, we systematically study the major components of our framework.
+We show that (1)composition of data augmentations plays a critical role in defining effective predictive tasks,
+(2) introducing a learnable nonlinear transformation between the representation and the contrastive loss substantially improves the quality of the learned representations,
+and (3) contrastive learning benefits from larger batch sizes and more training steps compared to supervised learning.
+By combining these findings, we are able to considerably outperform previous methods for self-supervised and semi-supervised learning on ImageNet.
+A linear classifier trained on self-supervised representations learned by SimCLR achieves 76.5\% top-1 accuracy, which is a 7\% relative improvement over previous state-of-the-art, matching the performance of a supervised ResNet-50.
+When fine-tuned on only 1\% of the labels, we achieve 85.8\% top-5 accuracy, outperforming AlexNet with 100x fewer labels.
+\end{abstract}
+
+\section{Introduction}
+Learning effective visual representations without human supervision is a long-standing problem \cite{b1}.
+Most mainstream approaches fall into one of two classes: generative or discriminative. Generative approaches learn to generate or otherwise model pixels in the input space.
+However, pixel-level generation is computationally expensive and may not be necessary for representation learning.
+Discriminative approaches learn representations using objective functions similar to those used for supervised learning, but train networks to perform pretext tasks where both the inputs and labels are derived from an unlabeled dataset.
+Many such approaches have relied on heuristics to design pretext tasks, which could limit the generality of the learned representations. Discriminative approaches based on contrastive learning in the latent space have recently shown great promise, achieving state-of-the-art results.
+
+In this work, we introduce a simple framework for contrastive learning of visual representations, which we call SimCLR. Not only does SimCLR outperform previous work, but it is also simpler, requiring neither specialized architectures nor a memory bank.
+
+In order to understand what enables good contrastive representation learning, we systematically study the major components of our framework and show that:
+\begin{itemize}
+    \item Composition of multiple data augmentation operations is crucial in defining contrastive prediction tasks that yield effective representations. In addition, unsupervised contrastive learning benefits from stronger data augmentation than supervised learning.
+    \item Introducing a learnable nonlinear transformation between the representation and the contrastive loss substantially improves the quality of the learned representations.
+    \item Representation learning with contrastive cross entropy loss benefits from normalized embeddings and an appropriately adjusted temperature parameter.
+    \item Contrastive learning benefits from large batch sizes and longer training compared to its supervised counterpart. Like supervised learning, contrastive learning benefits from deeper and wider networks.
+\end{itemize}
+
+We combine these findings to achieve a new state-of-the-art in self-supervised and semi-supervised learning on ImageNet ILSVRC-2012. Under the linear evaluation protocol, SimCLR achieves 76.5\% top-1 accuracy, which is a 7\% relative improvement over previous state-of-the-art.
+When fine-tuned with only 1\% of the ImageNet labels, SimCLR achieves 85.8\% top-5 accuracy, a relative improvement of 10\%. When fine-tuned on natural image classification datasets, SimCLR performs on par with or  better than a strong supervised baseline on 10 out of 12 datasets.
+
+\section{Method}
+\subsection{The Contrastive Learning Framework}
+Inspired by recent contrastive learning algorithms, simCLR learns representations by maximizing agreement between differently augmented views of the same data example via a contrastive loss in the latent space.
+This framework comprises the following four major components.
+\begin{itemize}
+    \item A stochastic data augmentation module that transforms any given data example randomly resulting in two correlated views of the same example, denoted $\tilde{x}_i$ and $\tilde{x}_j$, which we consider as a positive pair.
+    In this work, we sequentially apply three simple augmentations: random cropping followed by resize back to the original size, random color distortions, and random Gaussian blur. The combination of random crop and color distortion is crucial to achieve a good performance.
+    \item A neural network base encoder $f(\cdot)$ that extracts representation vectors from augmented data examples.
+    Our framework allows various choice of the network architecture without any constraints. We opt for simplicity and adopt the commonly used ResNet to obtain $h_i = f(\tilde{x}_i) = ResNet(\tilde{x}_i)$ where $h_i \in \mathbb{R}^d$ is the output after the average pooling layer.
+    \item A small neural network projection head $g(\cdot)$ that maps representations to the space where contrastive loss is applied. 
+    We use a MLP with one hidden layer to obtain $z_i = g(h_i) = W^{(2)}\sigma(W^{(1)}h_i)$ where $\sigma$ is a ReLU non-linearity.
+    We find it beneficial to define the contrastive loss on $z_i$'s rather than $h_i$'s.
+    \item A contrastive loss function defined for a contrastive prediction task. Given a set $\{\tilde{x}_k\}$ including a positive pair of examples $\tilde{x}_i$ and $\tilde{x}_j$, the contrastive prediction task aims to identify $\tilde{x}_j$ in $\{\tilde{x}_k\}_{k \neq i}$ for a given $\tilde{x}_i$.
+\end{itemize}
+
+We randomly sample of minibatch of $N$ examples and define the contrastive prediction task on pairs of augmented examples derived from the minibatch, resulting in $2N$ data points.
+We do not sample negative examples explicitly. 
+Instead, given a positive pair, we treat the other $2(N-1)$ augmented examples within a minibatch as negative examples.
+Let $sim(u,v) = u^{\top}v/\left\lVert u \right\rVert  \left\lVert  v \right\rVert  $ denote the cosine similarity between two vectors $u$ and $v$.
+Then the loss function for a positive pair of examples $(i,j)$ is defined as
+\begin{equation}
+    l_{i,j} = -\log{\frac{exp(sim((z_i, z_j)/\tau))}{\sum_{k=1}^{2N}\mathbb{1}_{k \neq i}exp(sim((z_i, z_k)/\tau)) }}
+\end{equation}
+where $\mathbb{1}_{k \neq i} \in \{0,1\}$ is an indicator function evaluating to 1 iff $k \neq i$ and $\tau$ denotes a temperature parameter.
+The final loss is computed across all positive pairs, both $(i,j)$ and $(j,i)$, in a mini-batch.
+This loss has been used in previous work; for convenience, we term it \textit{NT-Xent}(the normalized temperature-scaled cross entropy loss).
+
+Algorithm 1 summarizes the proposed method.
+
+\begin{algorithm}
+    \SetAlgoLined
+    \KwIn{batch size $N$, constant $\tau$, structure of $f$,$g$,$T$}
+    \For{sampled minibatch $\{x_k\}^N_{k=1}$}{
+        \ForAll {$k \in \{1, \ldots, N\}$}{
+            draw two augmentation functions $\tau\sim T$, $\tau'\sim T$\; 
+            \tcc{the first augmentation}
+            $\tilde{x}_{2k-1} = t(x_k)$\;
+            $h_{2k-1} = f(\tilde{x}_{2k-1})$\;
+            \tcc*{representation}
+            $z_{2k-1} = g(h_{2k-1})$\;
+            \tcc*{projection}
+            \tcc{the second augmentation}
+            $\tilde{x}_{2k} = t(x_k)$\;
+            $h_{2k} = f(\tilde{x}_{2k})$\;
+            \tcc*{representation}
+            $z_{2k} = g(h_{2k})$\;
+            \tcc*{projection}
+        }
+        \ForAll{$i \in \{1,\ldots, 2N\}$ and $j \in \{1,\ldots, 2N\}$}{
+            $s_{i,j} = z^{\top}_iz_j/(\left\lVert z_i\right\rVert \left\lVert z_j \right\rVert )$\;
+            \tcc*{pairwise similarity}
+        }
+        $L = \frac{1}{2N}\sum_{k = 1}^{N}[l(2k-1, 2k)+ l(2k, 2k-1)]$\;  
+        update networks $f$ and $g$ to minimize $L$
+      }
+      \Return {encoder network $f(\cdot)$, and throw away $g(\cdot)$}
+     \caption{SimCLR's main learning algorithm}
+\end{algorithm}
+
+\subsection{Training with Large Batch Size}
+We do not train the model with a memory bank. Instead, we vary the training batch size $N$ from 256 to 8192. 
+To stabilize training, we use the LARS optimizer for all batch sizes. We train our model with Cloud TPUs, using 32 to 128 cores depending on the batch size.
+
+\textbf{Global BN} Standard ResNets use batch normalization. In distributed training with data parallelism, the BN mean and variance are typically aggregated locally per device.
+In our contrastive learning, as positive pairs are computed in the same device, the model can exploit the local information leakage to improve prediction accuracy without improving representations.
+We address this issue by aggregating BN mean and variance over all devices during the training. Other approaches include shuffling data examples, or replacing BN with layer norm.
+
+\subsection{Evaluation Protocol}
+Here we lay out the protocol for our empirical studies, which aim to understand different design choices in our framework.
+
+\textbf{Dataset and Metrics} Most of our study for unsupervised pretraining (learning encoder network $f$ without labels) is done using the ImageNet ILSVRC-2012 dataset.
+Some additional pretraining experiments on CIFAR-10 can be found in Appendix B.9. 
+We also test the pretrained results on a wide range of datasets for transfer learning. 
+To evaluate the learned representations, we follow the widely used linear protocol, where a linear classifier is trained on top of the frozen base network,
+and test accuracy is used as a proxy for representation quality. 
+Beyond linear evaluation, we also compare against state-of-the-art on semi-supervised and transfer learning.
+
+\textbf{Default setting} Unless otherwise specified, for data augmentation we use random crop and resize (with random flip), color distortions, and Gaussian blur.
+We use ResNet-50 as the base encoder network, and a 2-layer MLP projection head to project the representation to a 128-dimensional latent space.
+As the loss, we use NT-Xent, optimized using LARS with linear learning rate scaling and weight decay of $10^{-6}$.
+
+We train at batch size 4096 for 100 epochs. Furthermore, we use linear warmup for the first 10 epochs, and decay the learning rate with the cosine decay schedule without restarts.
+
+\subsection{Data Augmentation for Contrastive Representation Learning}
+\textbf{Data augmentation defines predictive tasks}
+\bibliography{refs_contrastive}
+\bibliographystyle{plain}
+
+\end{document}
