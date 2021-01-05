@@ -1,0 +1,60 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Adversarial Domain Adaptation with Domain Mixup}
+
+\author{\IEEEauthorblockN{Seri Lee}
+\IEEEauthorblockA{\textit{Computer Science and Engineering} \\
+\textit{Seoul National University}\\
+Seoul, Republic of Korea\\
+sally20921@snu.ac.kr}
+ß
+}
+
+\maketitle
+
+\begin{abstract}
+Recent works on domain adaptation reveal the effectiveness of 
+adversarial learning on filling the discrepancy between source and 
+target domains. 
+However, two common limitations exist in current adversarial-learning-based
+methods. 
+First, samples from two domains alone are not sufficient to ensure domain-invariance
+at most part of latent space.
+Second, the domain discriminator involved in these methods can only 
+judge real or fake with the guidance of hard label, while it is more 
+reasonable to use soft scores to evaluate the generated images or features,
+\textit{i.e.}, to fully utilize the inter-domain information.
+In this paper, we present adversarial domain adaptation with 
+\textbf{domain mixup} (DM-ADA), which guarantees domain-invariance 
+in a more continuous latent space and guides the domain discriminator
+in judging samples' difference relative to source and target domains.
+Domain mixup is jointly conducted on pixel and feature level 
+to improve the robustness of models. 
+Extensive experiments prove that the proposed approach can achieve 
+superior performance on tasks with various degrees of domain shift 
+and data complexity.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Domain Adaptation, semantic segmentation, object recognition
+\end{IEEEkeywords}
+
+\section{Introduction}
+\cite{b1}.
+
+\bibliography{refs_mixup}
+\bibliographystyle{plain}
+
+
+\end{document}
