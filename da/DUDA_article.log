@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.12.26)  7 JAN 2021 08:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.12.26)  7 JAN 2021 08:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/seri/latex/base/base_newsletter.tex
-(/Users/seri/latex/base/base_newsletter.tex
+**/Users/seri/latex/da/DUDA_article.tex
+(/Users/seri/latex/da/DUDA_article.tex
 LaTeX2e <2020-10-01> patch level 2
 L3 programming layer <2020-12-07> xparse <2020-03-03> (/usr/local/texlive/2020basic/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
@@ -322,8 +322,8 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count299
 \l__pdf_internal_box=\box51
-) (/Users/seri/latex/base/base_newsletter.aux)
-\openout1 = `base_newsletter.aux'.
+) (/Users/seri/latex/da/DUDA_article.aux)
+\openout1 = `DUDA_article.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
 LaTeX Font Info:    ... okay on input line 72.
@@ -407,9 +407,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 72.
 LaTeX Info: Redefining \pageref on input line 72.
 LaTeX Info: Redefining \nameref on input line 72.
- (/Users/seri/latex/base/base_newsletter.out) (/Users/seri/latex/base/base_newsletter.out)
+ (/Users/seri/latex/da/DUDA_article.out) (/Users/seri/latex/da/DUDA_article.out)
 \@outlinefile=\write3
-\openout3 = `base_newsletter.out'.
+\openout3 = `DUDA_article.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 76.
  (/usr/local/texlive/2020basic/texmf-dist/tex/latex/psnfss/ot1pplx.fd
@@ -441,27 +441,26 @@ Package microtype Info: Character `029' is missing
 LaTeX Font Info:    Trying to load font information for TS1+pplx on input line 76.
  (/usr/local/texlive/2020basic/texmf-dist/tex/latex/psnfss/ts1pplx.fd
 File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
-) (/Users/seri/latex/base/base_newsletter.bbl) [1{/usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+) (/Users/seri/latex/da/DUDA_article.bbl) [1{/usr/local/texlive/2020basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
-
-] (/Users/seri/latex/base/base_newsletter.aux)
-Package rerunfilecheck Info: File `base_newsletter.out' has not changed.
-(rerunfilecheck)             Checksum: A02D95553E30B97FF125B1AA17CF9044;47.
+] (/Users/seri/latex/da/DUDA_article.aux)
+Package rerunfilecheck Info: File `DUDA_article.out' has not changed.
+(rerunfilecheck)             Checksum: B94568256A9255F845E78C81CCB82C1E;115.
  ) 
 Here is how much of TeX's memory you used:
- 10332 strings out of 479382
- 166777 string characters out of 5866894
- 518339 words of memory out of 5000000
- 27071 multiletter control sequences out of 15000+600000
- 453329 words of font info for 199 fonts, out of 8000000 for 9000
+ 10371 strings out of 479382
+ 167244 string characters out of 5866894
+ 520409 words of memory out of 5000000
+ 27092 multiletter control sequences out of 15000+600000
+ 457864 words of font info for 221 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,12n,72p,302b,379s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2020basic/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on /Users/seri/latex/base/base_newsletter.pdf (1 page, 66366 bytes).
+ 66i,12n,72p,297b,379s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2020basic/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on /Users/seri/latex/da/DUDA_article.pdf (1 page, 76544 bytes).
 PDF statistics:
- 38 PDF objects out of 1000 (max. 8388607)
- 30 compressed objects within 1 object stream
- 4 named destinations out of 1000 (max. 500000)
- 87049 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 46 PDF objects out of 1000 (max. 8388607)
+ 37 compressed objects within 1 object stream
+ 5 named destinations out of 1000 (max. 500000)
+ 88081 words of extra memory for PDF output out of 89155 (max. 10000000)
 

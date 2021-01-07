@@ -5,7 +5,9 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
 \usepackage[ruled,vlined]{algorithm2e}
+\usepackage{pgfplots}
 \usepackage{graphicx}
+\graphicspath{{../images}}
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{verbatim}
@@ -120,6 +122,97 @@ We then compute a code $q_{nt}$ from this feature by mapping $z_{nt}$ to a set o
 We denote by $C$ the matrix whose columns are the $c_1, \ldots, c_k$. We now describe how to compute these codes and update the prototypes online.
 
 \subsection{Swapped prediction problem}
+The loss function has two terms that setup the ``swapped'' prediction problem of predicting the code $q_t$ from the feature $z_s$, and $q_s$ from $z_t$. 
+Each term represents the cross entropy loss between the code and the probability obtained by taking a softmax of the dot products of $z_i$ and all prototypes in $C$, i.e.,
+\begin{equation}
+    l(z_t, q_s) = -\sum_{(k)}q_s^{k}\log p_t^{(k)}
+\end{equation}
+, where
+\begin{equation}
+    p_t^{(k)} = \frac{exp(\frac{1}{T}z_t^{\top}c_k)}{\sum_{k'}exp(\frac{1}{\tau}z_t^{\top}c_{k'})} 
+\end{equation}
+where $\tau$ is a temperature parameter. Taking this loss over all the images and pairs of data augmentations leads to the following loss function for the swapped prediction problem:
+\begin{equation}
+    -\frac{1}{N}\sum_{n=1}^{N}\sum_{t \sim T}[ \frac{1}{\tau}z_{nt}^{\top}Cq_{ns}+ \frac{1}{\tau}z_{ns}^{\top}Cq_{nt} -\log\sum^{K}_{k=1}exp(\frac{z_{ns}^{\top}c_k}{\tau})]
+\end{equation}
+This loss function is jointly minimized with respect to the prototypes $C$ and the parameter $\theta$ of the image encoder $f_\theta$ used to produce the features $(z_{nt})_{n,t}$.
+
+\textbf{Computing codes online} In order to make our method online, we compute the codes using only the image features within a batch.
+Intuitively, as the prototypes $C$ are used across different batches, SwAV clusters multiple instances to the prototypes.
+We compute codes using the prototypes $C$ such that all the examples in a batch are equally partitioned by the prototypes. 
+This equipartition constraint ensures that the codes for different images in a batch are distinct, thus preventing the trivial solution where every image has the same code.
+Given $B$ feature vectors $Z = [z_1, \ldots, z_B]$, we are interested in mapping them to the prototypes $C = [c_1, \ldots, c_K]$. 
+We denote this mapping or codes by $Q = [q_1, \ldots, q_B]$, and optimize $Q$ to maximize the similarity between the features and the prototypes, i.e.,
+\begin{equation}
+    \max_{Q \in \mathcal{Q}} Tr(Q^{\top}C^{\top}Z) + \varepsilon H(Q) 
+\end{equation}
+We observe that a strong entropy regularization (i.e. using a high $\varepsilon$) generally leads to a trivial solution where all samples collapse into an unique representation and are all assigned uniformly to all prototypes.
+Hence, in practice we keep $\varepsilon$ low. Asano et al. enforce an equal partition by constraining the matrix $Q$ to belong to the transportation polytope. 
+They work on the full dataset, and we propose to adapt their solution to work on minibatches by restricting the transportation polytope to the minibatch:
+\begin{equation}
+    \mathcal{Q} = \{ Q \in \mathbb{R}^{K \times B}_{+} | Q1_{B} = \frac{1}{K}1_K , Q^{\top}1_{K} = \frac{1}{B}1_{B} \}
+\end{equation}
+where $1_K$ denotes the vector of ones in dimension $K$. These constraints enforce that on average each prototype is selected at least $\frac{B}{K}$ times in the batch.
+
+Once a continuous solution $Q^{*}$ is found, a discrete code can be obtained by using a rounding procedure.
+Empirically, we found that discrete codes work well when computing codes in an offline manner on the full dataset as in Asano et al. 
+However, in the online setting where we only use minibatches, using the discrete codes performs worse than using the continuous codes.
+An explanation is that the rounding needed to obtain discrete codes is a more aggressive optimization step than gradient updates.
+While it makes the model converge rapidly, it leads to a worse solution.
+We thus preserve the soft code $Q^{*}$ instead of rounding it. These soft codes $Q^{*}$ are the solution over the set $\mathcal{Q}$ and takes the form of a normalized exponential matrix:
+\begin{equation}
+    Q^{*} = Diag(u)exp(\frac{C^{\top}Z}{\varepsilon})Diag(v)
+\end{equation}
+, where $u$ and $v$ are renormalized vecctors in $\mathbb{R}^K$ and $\mathbb{R}^B$ respectively. The renormalized vectors are computed using a small number of matrix multiplications using the iterative Sinkhorn-Knopp algorithm.
+In practice, we observe that using only 3 iterations is fast and sufficient to obtain good performance.
+Indeed, this algorithm can be efficiently implemented on GPU, and the alignment of 4K features to 3K codes takes 35ms in our experiments.
+
+\textbf{Working with small batches} When the number $B$ of batch features is too small compared to the number of prototypes $K$, it is impossible to equally partition the batch into $K$ prototypes.
+Therefore, when working with small batches, we use features from the previous batches to augment the size of $Z$. Then, we only use the codes of the batch features in our training loss.
+In practice, we store around 3K features, i.e., in the same range as the number of code vectors.
+This means that we only keep features from the last 15 batches with a batch size of 256, while contrastive methods typically need to store the last 65K instances obtained from the last 250 batches.
+
+\subsection{Multi-crop: Augmenting views with smaller images}
+As noted in prior works, comparing random crops of an image plays a central role by capturing information in terms of relations between parts of a scene or an object.
+unfortunately, increasing the number of crops or ``views'' quadratically increases the memory and compute requirements.
+We propose a multi-crop strategy where we use two standard resolution crops and sample $V$ additional low resolution crops that cover only small parts of the image.
+Using low resolution images ensures only a small increase in the compute cost. Specifically, we generalize the loss:
+\begin{equation}
+    L(z_{t_1}, z_{t_2}, \ldots, z_{t_{V+2}}) = \sum_{i \in \{1,2\}}\sum_{v=1}^{V+2}1_{v \neq i}l(z_{t_v}, q_{t_i})
+\end{equation}.
+Note that we compute codes using only the full resolution crops. Indeed, computing codes for all crops increases the computational time and we observe in practice that it also alters the transfer performance of the resulting network.
+An explanation is that using only partial information (small crops cover only small area of images) degrades the assignment quality. 
+
+\begin{table}[]
+    \caption{}
+    \label{tab:my-table}
+    \begin{tabular}{llll}
+    \hline
+    \multicolumn{1}{|l|}{Method} & \multicolumn{1}{l|}{Architecture} & \multicolumn{1}{l|}{Parameter} & \multicolumn{1}{l|}{Top-1 accuracy} \\ \hline
+    Supervised & ResNet50 & 24 & 76.5 \\
+    MoCo       & ResNet50 & 24 & 60.6 \\
+    PIRL       & ResNet50 & 24 & 63.6 \\
+    SimCLR     & ResNet50 & 24 & 70.0 \\ \hline
+    SwaV       & ResNet50 & 24 & 75.3
+    \end{tabular}
+    \end{table}
+
+\begin{figure}
+    \includegraphics[scale=0.5]{sample}
+\end{figure}
+
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=left,
+    xlabel=$x$,
+    ylabel={$f(x)$},
+]
+
+\addplot [color=red]{x^2};
+\addlegendentry{$x^2-2x-1$}
+\end{axis}
+\end{tikzpicture}
+
 
 \bibliography{refs_contrastive}
 \bibliographystyle{plain}
