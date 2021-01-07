@@ -156,9 +156,6 @@ We learn features by Swapping Assignments between multiples Views of the Same Im
   \setfloatalignment{b}
 \end{figure}
 
-\section{Related Work}\label{sec:related-work}
-\subsection{Instance and contrastive learning}\label{sec:instance-and-contrastive-learning}
-
 Besides our online clustering-based method, we also propose an improvement to the image transformations.
 Most contrastive methods compare one pair of transformations per image, even though there is evidence that comparing more views during training improves the resulting model.
 In this work, we propose $multi-crop$ that uses smaller-sized images to increase the number of views while not increasing the memory or computational requirements during training.
@@ -168,61 +165,10 @@ Directly working with downsized images introduces a bias in the features, which 
 Our strategy is simple, yet effective, and can be applied to many self-supervised methods with consistent gain in performance.
 
 They validate their contributions by evaluating their protocol on several standard self-supervised benchmarks.
-
-%\begin{docspec}
-%  \doccmd{newthought\{In his later books\}, Tufte starts\ldots}
-%\end{docspec}
-
-\subsection{Sidenotes}\label{sec:sidenotes}
-One of the most prominent and distinctive features of this style is the
-extensive use of sidenotes.  There is a wide margin to provide ample room
-for sidenotes and small figures.  Any \Verb|\footnote|s will automatically
-be converted to sidenotes.\footnote{This is a sidenote that was entered
-using the \texttt{\textbackslash footnote} command.}  If you'd like to place ancillary
-information in the margin without the sidenote mark (the superscript
-number), you can use the \Verb|\marginnote| command.\marginnote{This is a
-margin note.  Notice that there isn't a number preceding the note, and
-there is no number in the main text where this note was written.}
-
-The specification of the \Verb|\sidenote| command is:
-\begin{docspec}
-  \doccmd{sidenote[\docopt{number}][\docopt{offset}]\{\docarg{Sidenote text.}\}}
-\end{docspec}
-
-Both the \docopt{number} and \docopt{offset} arguments are optional.  If you
-provide a \docopt{number} argument, then that number will be used as the
-sidenote number.  It will change of the number of the current sidenote only and
-will not affect the numbering sequence of subsequent sidenotes.
-
-Sometimes a sidenote may run over the top of other text or graphics in the
-margin space.  If this happens, you can adjust the vertical position of the
-sidenote by providing a dimension in the \docopt{offset} argument.  Some
-examples of valid dimensions are:
-\begin{docspec}
-  \ttfamily 1.0in \qquad 2.54cm \qquad 254mm \qquad 6\Verb|\baselineskip|
-\end{docspec}
-If the dimension is positive it will push the sidenote down the page; if the
-dimension is negative, it will move the sidenote up the page.
-
-While both the \docopt{number} and \docopt{offset} arguments are optional, they
-must be provided in order.  To adjust the vertical position of the sidenote
-while leaving the sidenote number alone, use the following syntax:
-\begin{docspec}
-  \doccmd{sidenote[][\docopt{offset}]\{\docarg{Sidenote text.}\}}
-\end{docspec}
-The empty brackets tell the \Verb|\sidenote| command to use the default
-sidenote number.
-
-If you \emph{only} want to change the sidenote number, however, you may
-completely omit the \docopt{offset} argument:
-\begin{docspec}
-  \doccmd{sidenote[\docopt{number}]\{\docarg{Sidenote text.}\}}
-\end{docspec}
-
-The \Verb|\marginnote| command has a similar \docarg{offset} argument:
-\begin{docspec}
-  \doccmd{marginnote[\docopt{offset}]\{\docarg{Margin note text.}\}}
-\end{docspec}
+In particular, on the ImageNet linear evaluation protocol, they reach 75.3\% top-1 accuracy with a standard ResNet-50, and 78.5\% with a wider model. 
+% \footnote[]{} \marginnote{} \sidenote[]{}
+\subsection{Method}\label{sec:method}
+Our goal is to learn visual 
 
 \subsection{References}
 References are placed alongside their citations as sidenotes,

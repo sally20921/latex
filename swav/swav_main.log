@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.12.26)  7 JAN 2021 16:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.12.26)  7 JAN 2021 21:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -804,10 +804,10 @@ LaTeX Warning: Label `fig:textfig' multiply defined.
 LaTeX Warning: Label `fig:marginfig' multiply defined.
 
 
-LaTeX Warning: Label `fig:textfig' multiply defined.
-
-
 LaTeX Warning: Label `tab:normaltab' multiply defined.
+
+
+LaTeX Warning: Label `fig:textfig' multiply defined.
 
 )
 \openout1 = `swav_main.aux'.
@@ -978,7 +978,7 @@ Overfull \hbox (27.41795pt too wide) in paragraph at lines 118--119
 
 LaTeX Warning: Marginpar on page 2 moved.
 
-<../images/instance.png, id=50, 584.1825pt x 311.1625pt>
+<../images/instance.png, id=46, 584.1825pt x 311.1625pt>
 File: ../images/instance.png Graphic file (type png)
 <use ../images/instance.png>
 Package pdftex.def Info: ../images/instance.png  used on input line 139.
@@ -993,7 +993,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 139--146
 
  []
 
-<../images/swav.png, id=52, 645.41125pt x 313.17pt>
+<../images/swav.png, id=48, 645.41125pt x 313.17pt>
 File: ../images/swav.png Graphic file (type png)
 <use ../images/swav.png>
 Package pdftex.def Info: ../images/swav.png  used on input line 149.
@@ -1009,97 +1009,94 @@ Underfull \hbox (badness 10000) in paragraph at lines 149--157
  []
 
 [2] [3 </Users/seri/latex/swav/../images/instance.png> </Users/seri/latex/swav/../images/swav.png>]
-LaTeX Font Info:    Trying to load font information for T1+fvm on input line 179.
+LaTeX Font Info:    Trying to load font information for T1+fvm on input line 175.
  (/usr/local/texlive/2020basic/texmf-dist/tex/latex/bera/t1fvm.fd
 File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 )
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 8.50006pt on input line 179.
-LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 6.80005pt on input line 181.
+(Font)              scaled to size 8.50006pt on input line 175.
 
 
 LaTeX Warning: Marginpar on page 4 moved.
 
 
+Package natbib Warning: Citation `Tufte2006' undefined on input line 183.
+
+
+Package natbib Warning: Citation `Tufte1990' undefined on input line 183.
+
+
 LaTeX Warning: Marginpar on page 4 moved.
 
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 7.65005pt on input line 189.
-[4]
-
-LaTeX Warning: Marginpar on page 5 moved.
-
-
-Package natbib Warning: Citation `Tufte2006' undefined on input line 237.
-
-
-Package natbib Warning: Citation `Tufte1990' undefined on input line 237.
-
-
-LaTeX Warning: Marginpar on page 5 moved.
-
-LaTeX Font Info:    Trying to load font information for T1+phv on input line 246.
+(Font)              scaled to size 7.65005pt on input line 187.
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 192.
 (/usr/local/texlive/2020basic/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 246.
-<../images/sample.jpg, id=71, 642.4pt x 428.60126pt>
+(Font)              scaled to size 8.99994pt on input line 192.
+<../images/sample.jpg, id=60, 642.4pt x 428.60126pt>
 File: ../images/sample.jpg Graphic file (type jpg)
 <use ../images/sample.jpg>
-Package pdftex.def Info: ../images/sample.jpg  used on input line 256.
+Package pdftex.def Info: ../images/sample.jpg  used on input line 202.
 (pdftex.def)             Requested size: 143.99464pt x 96.07143pt.
+LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
+(Font)              scaled to size 6.80005pt on input line 205.
+
+
+LaTeX Warning: Reference `sec:sidenotes' on page 4 undefined on input line 215.
+
+[4 </Users/seri/latex/swav/../images/sample.jpg>]
 File: ../images/sample.jpg Graphic file (type jpg)
 <use ../images/sample.jpg>
-Package pdftex.def Info: ../images/sample.jpg  used on input line 285.
+Package pdftex.def Info: ../images/sample.jpg  used on input line 231.
 (pdftex.def)             Requested size: 480.01482pt x 320.25989pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 File: ../images/sample.jpg Graphic file (type jpg)
 <use ../images/sample.jpg>
-Package pdftex.def Info: ../images/sample.jpg  used on input line 292.
+Package pdftex.def Info: ../images/sample.jpg  used on input line 238.
 (pdftex.def)             Requested size: 312.00473pt x 208.16565pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 292--299
+Underfull \hbox (badness 10000) in paragraph at lines 238--245
 
  []
 
-[5 </Users/seri/latex/swav/../images/sample.jpg>] [6]
+[5]
 
-Package natbib Warning: Citation `Bringhurst2005' undefined on input line 353.
+Package natbib Warning: Citation `Bringhurst2005' undefined on input line 299.
 
 
-LaTeX Warning: Marginpar on page 7 moved.
+LaTeX Warning: Marginpar on page 6 moved.
 
-[7]
+[6]
 No file swav_main.bbl.
 
 Package natbib Warning: There were undefined citations.
 
-[8] (/Users/seri/latex/swav/swav_main.aux)
+[7] (/Users/seri/latex/swav/swav_main.aux)
 Package rerunfilecheck Info: File `swav_main.out' has not changed.
-(rerunfilecheck)             Checksum: 15C5FF95FD74CDBDC8E41E5A0443C99D;928.
+(rerunfilecheck)             Checksum: C9C43EA2EEFFD6CEF9B7F9778EAA1A5F;820.
+
+
+LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 35238 strings out of 479382
- 788020 string characters out of 5866894
- 1443679 words of memory out of 5000000
- 51608 multiletter control sequences out of 15000+600000
- 484235 words of font info for 156 fonts, out of 8000000 for 9000
+ 35237 strings out of 479382
+ 787963 string characters out of 5866894
+ 1442183 words of memory out of 5000000
+ 51607 multiletter control sequences out of 15000+600000
+ 487160 words of font info for 160 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  97i,19n,100p,749b,2388s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020basic/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2020basic/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on /Users/seri/latex/swav/swav_main.pdf (8 pages, 261021 bytes).
+Output written on /Users/seri/latex/swav/swav_main.pdf (7 pages, 259752 bytes).
 PDF statistics:
- 148 PDF objects out of 1000 (max. 8388607)
- 121 compressed objects within 2 object streams
- 25 named destinations out of 1000 (max. 500000)
- 1628 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 137 PDF objects out of 1000 (max. 8388607)
+ 111 compressed objects within 2 object streams
+ 22 named destinations out of 1000 (max. 500000)
+ 1620 words of extra memory for PDF output out of 10000 (max. 10000000)
 

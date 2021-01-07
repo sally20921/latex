@@ -1,18 +1,18 @@
 # Fdb version 3
-["bibtex swav_main"] 1610003344 "swav_main.aux" "swav_main.bbl" "swav_main" 1610003344
+["bibtex swav_main"] 1610023275 "swav_main.aux" "swav_main.bbl" "swav_main" 1610023275
   "/usr/local/texlive/2020basic/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
   "sample-handout.bib" 0 -1 0 ""
-  "swav_main.aux" 1610003323 5686 06a22a48416ea6c3814872f23e0d9da4 "pdflatex"
+  "swav_main.aux" 1610023274 5285 886c3e892bd0442aa1e5a3bba877639c "pdflatex"
   (generated)
-  "swav_main.bbl"
   "swav_main.blg"
-["pdflatex"] 1610003321 "/Users/seri/latex/swav/swav_main.tex" "/Users/seri/latex/swav/swav_main.pdf" "swav_main" 1610003344
+  "swav_main.bbl"
+["pdflatex"] 1610023272 "/Users/seri/latex/swav/swav_main.tex" "/Users/seri/latex/swav/swav_main.pdf" "swav_main" 1610023275
   "../images/instance.png" 1610002995 59388 0e4872b63604d62dba0107879fc1d0cd ""
   "../images/sample.jpg" 1609989598 65394 4bb85f3f57669d84a3fcdd14e9d21b48 ""
   "../images/swav.png" 1610003033 73188 05ad62747aba4757e6fe65379b7803fe ""
-  "/Users/seri/latex/swav/swav_main.aux" 1610003323 5686 06a22a48416ea6c3814872f23e0d9da4 ""
-  "/Users/seri/latex/swav/swav_main.tex" 1610003342 17978 63737a4e2acac13cc580eaf2c6ae5c4e ""
-  "/dev/null" 1610003323 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "/Users/seri/latex/swav/swav_main.aux" 1610023274 5285 886c3e892bd0442aa1e5a3bba877639c ""
+  "/Users/seri/latex/swav/swav_main.tex" 1610023271 15541 cc357a3d5cfa478aa05d13035736efed ""
+  "/dev/null" 1610023238 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2020basic/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2020basic/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2020basic/texmf-dist/fonts/tfm/adobe/helvetic/phvr8r.tfm" 1136768653 4712 9ef4d7d106579d4b136e1529e1a4533c ""
@@ -289,14 +289,14 @@
   "/usr/local/texlive/2020basic/texmf-var/web2c/pdftex/pdflatex.fmt" 1608931390 2553459 8892695733bea2b75cd7fbfc5a9d1498 ""
   "/usr/local/texlive/2020basic/texmf.cnf" 1586277716 628 4346f9a816ba8e5dc36d93d5100b369e ""
   "swav.tex" 1609990576 896 b884b1b34dc814c9f3adefb0b7339b72 ""
-  "swav_main.aux" 1610003323 5686 06a22a48416ea6c3814872f23e0d9da4 "pdflatex"
+  "swav_main.aux" 1610023274 5285 886c3e892bd0442aa1e5a3bba877639c "pdflatex"
   "swav_main.bbl" 0 -1 0 "bibtex swav_main"
-  "swav_main.out" 1610003323 928 15c5ff95fd74cdbdc8e41e5a0443c99d "pdflatex"
-  "swav_main.tex" 1610003342 17978 63737a4e2acac13cc580eaf2c6ae5c4e ""
+  "swav_main.out" 1610023274 820 c9c43ea2eeffd6cef9b7f9778eaa1a5f "pdflatex"
+  "swav_main.tex" 1610023271 15541 cc357a3d5cfa478aa05d13035736efed ""
   (generated)
-  "/Users/seri/latex/swav/swav_main.pdf"
+  "swav_main.aux"
+  "swav_main.pdf"
   "swav_main.log"
   "swav_main.out"
+  "/Users/seri/latex/swav/swav_main.pdf"
   "/Users/seri/latex/swav/swav_main.log"
-  "swav_main.pdf"
-  "swav_main.aux"
